@@ -6,4 +6,7 @@ module.exports = (app) => {
   app.post('/register',
     AuthenControllerPolicy.register,
     AuthenController.register)
+
+  app.post('/login',
+    AuthenController.login)
 }

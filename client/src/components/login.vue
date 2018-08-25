@@ -4,27 +4,25 @@
       <div class="white elevation-2">
         <v-toolbar flat dense color="teal lighten-3" dark>
           <v-toolbar-title>
-            Sign Up
+            Login
           </v-toolbar-title>
         </v-toolbar>
         <div class="pl-4 pr-4 pt-2 pb-2">
-          <form name="register-form"
-          autocomplete="off">
-            <v-text-field
-              label="E-mail"
-              v-model="email"
-            ></v-text-field>
-            <v-text-field
-              label="Password"
-              type="password"
-              v-model="password"
-              autocomplete="new-password"
-            ></v-text-field>
-              <div v-html="error" class="error"></div>
-            <v-btn
-              color="teal lighten-3"
-              @click="register" dark>Register</v-btn>
-          </form>
+          <v-text-field
+            label="E-mail"
+            v-model="email"
+          ></v-text-field>
+
+          <v-text-field
+            label="Password"
+            type="password"
+            v-model="password"
+          ></v-text-field>
+
+          <div v-html="error" class="error"></div>
+          <v-btn
+            color="teal lighten-3"
+            @click="login" dark>Login</v-btn>
         </div>
       </div>
     </v-flex>
@@ -42,15 +40,15 @@ export default {
     }
   },
   methods: {
-    async register () {
+    async login () {
       try {
-        const response = await AuthenService.register({
+        const response = await AuthenService.login({
           email: this.email,
           password: this.password
         })
-        this.error = null
         this.$store.dispatch('setToken', response.data.token)
         this.$store.dispatch('setUser', response.data.user)
+        this.error = null
       } catch (e) {
         this.error = e.response.data.error
       }
