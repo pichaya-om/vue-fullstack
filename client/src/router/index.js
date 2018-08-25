@@ -3,9 +3,10 @@ import Router from 'vue-router'
 import Home from '@/components/Home'
 import Register from '@/components/Register'
 import Login from '@/components/Login'
-import Song from '@/components/Song'
-import CreateSong from '@/components/CreateSong'
-import ShowSong from '@/components/ShowSong'
+import Song from '@/components/songs/Song'
+import CreateSong from '@/components/songs/CreateSong'
+import EditSong from '@/components/songs/EditSong'
+import ShowSong from '@/components/songs/ShowSong'
 
 Vue.use(Router)
 
@@ -37,8 +38,13 @@ export default new Router({
       component: CreateSong
     },
     {
-      path: '/song/:songId',
-      name: 'song-show',
+      path: '/songs/:songId/edit',
+      name: 'songs-edit',
+      component: EditSong
+    },
+    {
+      path: '/songs/:songId',
+      name: 'songs-show',
       component: ShowSong
     }
   ]

@@ -5,11 +5,15 @@ export default {
     return Api().get('songs')
   },
   create (song) {
-    return Api().post('song', song)
+    return Api().post('songs', song)
+  },
+  show (songId) {
+    return Api().get(`songs/${songId}`)
+  },
+  update (song) {
+    return Api().put(`songs/${song.id}`, song)
+  },
+  deleteSong (songId) {
+    return Api().delete(`songs/${songId}`)
   }
 }
-
-// AuthenService.register({
-//   email: 'test@gmail.com'
-//   password: '1234'
-// })

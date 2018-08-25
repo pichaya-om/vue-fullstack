@@ -27,11 +27,23 @@
               <v-btn
                 dark
                 class="mt-4"
-                color="teal lighten-3"
-                @click="navigateTo({
-                  name: 'song/'+song.id
-                })">
+                color="teal lighten-1"
+                @click="navigateTo('songs-show', song.id)">
                 View
+              </v-btn>
+              <v-btn
+                dark
+                class="mt-4"
+                color="teal lighten-3"
+                @click="navigateTo('songs-edit', song.id)">
+                Edit
+              </v-btn>
+              <v-btn
+                dark
+                class="mt-4"
+                color="orange lighten-3"
+                @click="deleteSong(song.id)">
+                Delete
               </v-btn>
             </v-flex>
             <v-flex xs6>
@@ -61,8 +73,22 @@ export default {
     this.songs = (await SongsService.index()).data
   },
   methods: {
-    navigateTo (route) {
-      this.$router.push(route.name)
+    navigateTo (name, songId) {
+      this.$router.push({
+        name: name,
+        params: {songId: songId}})
+    },
+    async deleteSong (songId) {
+      if (confirm(`Are you sure you want to delete song with id ${songId} ?`)) {
+        try {
+          await SongsService.deleteSong(songId)
+          this.$router.push({
+            name: 'songs'
+          })
+        } catch (err) {
+          console.log(err)
+        }
+      }
     }
   }
 }
