@@ -1,37 +1,32 @@
 <template>
-  <v-layout align-center justify-center row>
-    <v-flex xs4 >
-      <div class="white elevation-2">
-        <v-toolbar flat dense color="teal lighten-3" dark>
-          <v-toolbar-title>
-            Sign Up
-          </v-toolbar-title>
-        </v-toolbar>
-        <div class="pl-4 pr-4 pt-2 pb-2">
-          <form name="register-form"
-          autocomplete="off">
-            <v-text-field
-              label="E-mail"
-              v-model="email"
-            ></v-text-field>
-            <v-text-field
-              label="Password"
-              type="password"
-              v-model="password"
-              autocomplete="new-password"
-            ></v-text-field>
-              <div v-html="error" class="error"></div>
-            <v-btn
-              color="teal lighten-3"
-              @click="register" dark>Register</v-btn>
-          </form>
-        </div>
-      </div>
+  <v-layout justify-center row>
+    <v-flex xs4>
+      <panel title="Sign Up">
+        <form name="register-form"
+              autocomplete="off">
+          <v-text-field
+            label="E-mail"
+            v-model="email"
+          ></v-text-field>
+          <v-text-field
+            label="Password"
+            type="password"
+            v-model="password"
+            autocomplete="new-password"
+          ></v-text-field>
+          <div v-html="error" class="error"></div>
+          <v-btn
+            color="teal lighten-3"
+            @click="register" dark>Register
+          </v-btn>
+        </form>
+      </panel>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
+import Panel from '@/components/Panel'
 import AuthenService from '@/services/AuthenService'
 export default {
   data () {
@@ -55,6 +50,9 @@ export default {
         this.error = e.response.data.error
       }
     }
+  },
+  components: {
+    Panel
   }
 }
 </script>
