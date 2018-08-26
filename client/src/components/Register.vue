@@ -1,7 +1,7 @@
 <template>
   <v-layout justify-center row>
     <v-flex xs4>
-      <panel title="Sign Up">
+      <panel title="Register">
         <form name="register-form"
               autocomplete="off">
           <v-text-field
@@ -14,7 +14,7 @@
             v-model="password"
             autocomplete="new-password"
           ></v-text-field>
-          <div v-html="error" class="error"></div>
+          <div v-html="error" class="danger-alert"></div>
           <v-btn
             color="teal lighten-3"
             @click="register" dark>Register
@@ -26,7 +26,6 @@
 </template>
 
 <script>
-import Panel from '@/components/Panel'
 import AuthenService from '@/services/AuthenService'
 export default {
   data () {
@@ -46,13 +45,11 @@ export default {
         this.error = null
         this.$store.dispatch('setToken', response.data.token)
         this.$store.dispatch('setUser', response.data.user)
+        this.$router.push({name: 'songs-index'})
       } catch (e) {
         this.error = e.response.data.error
       }
     }
-  },
-  components: {
-    Panel
   }
 }
 </script>

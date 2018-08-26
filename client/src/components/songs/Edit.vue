@@ -67,9 +67,15 @@
       <v-btn
         class="mt-4"
         color="teal lighten-3"
+        :to="{name: 'songs-index'}"
+        dark> Back
+      </v-btn>
+      <v-btn
+        class="mt-4"
+        color="teal lighten-1"
         @click="update(song.id)" dark>Update Song
       </v-btn>
-      <div class="error-custom" v-if="error">
+      <div class="danger-alert" v-if="error">
         {{error}}
       </div>
     </v-flex>
@@ -77,7 +83,6 @@
 </template>
 
 <script>
-import Panel from '@/components/Panel'
 import SongsService from '@/services/SongsService'
 export default {
   data () {
@@ -96,9 +101,6 @@ export default {
       required: (value) => !!value || 'Required.'
     }
   },
-  components: {
-    Panel
-  },
   async mounted () {
     const songId = this.$store.state.route.params.songId
     this.song = (await SongsService.show(songId)).data
@@ -115,7 +117,7 @@ export default {
       }
       try {
         await SongsService.update(this.song)
-        this.$router.push('/songs')
+        this.$router.push({name: 'songs-index'})
       } catch (err) {
         console.log(err)
       }
@@ -125,7 +127,4 @@ export default {
 </script>
 
 <style scoped>
-.error-custom {
-  color: red;
-}
 </style>

@@ -1,8 +1,12 @@
 import Api from '@/services/Api'
 
 export default {
-  index () {
-    return Api().get('songs')
+  index (search) {
+    return Api().get('songs', {
+      params: {
+        search: search
+      }
+    })
   },
   create (song) {
     return Api().post('songs', song)
@@ -13,7 +17,7 @@ export default {
   update (song) {
     return Api().put(`songs/${song.id}`, song)
   },
-  deleteSong (songId) {
-    return Api().delete(`songs/${songId}`)
+  deleteSong (song) {
+    return Api().delete(`songs/${song.id}`, song)
   }
 }

@@ -14,7 +14,7 @@
             v-model="password"
           ></v-text-field>
 
-          <div v-html="error" class="error"></div>
+          <div v-html="error" class="danger-alert"></div>
           <v-btn
             color="teal lighten-3"
             @click="login" dark>Login</v-btn>
@@ -25,7 +25,6 @@
 </template>
 
 <script>
-import Panel from '@/components/Panel'
 import AuthenService from '@/services/AuthenService'
 export default {
   data () {
@@ -44,14 +43,12 @@ export default {
         })
         this.$store.dispatch('setToken', response.data.token)
         this.$store.dispatch('setUser', response.data.user)
+        this.$router.push({name: 'songs-index'})
         this.error = null
       } catch (e) {
         this.error = e.response.data.error
       }
     }
-  },
-  components: {
-    Panel
   }
 }
 </script>

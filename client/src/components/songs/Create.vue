@@ -77,7 +77,6 @@
 </template>
 
 <script>
-import Panel from '@/components/Panel'
 import SongService from '@/services/SongsService'
 export default {
   data () {
@@ -96,9 +95,6 @@ export default {
       required: (value) => !!value || 'Required.'
     }
   },
-  components: {
-    Panel
-  },
   methods: {
     async create () {
       this.error = null
@@ -112,7 +108,7 @@ export default {
       try {
         await SongService.create(this.song)
         this.$router.push({
-          name: 'songs'
+          name: 'songs-index'
         })
       } catch (err) {
         console.log(err)
